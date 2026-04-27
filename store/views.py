@@ -1,4 +1,6 @@
 from rest_framework.views import APIView
+import json
+from django.core.management import call_command
 from django.http import JsonResponse
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
@@ -139,3 +141,7 @@ class SearchProducts(APIView):
         serializer = ProductListSerializer(products[:10], many=True)
 
         return Response(serializer.data)
+    
+def load_data(request):
+    call_command('loaddata', 'data.json')
+    return JsonResponse({"status": "data loaded"})

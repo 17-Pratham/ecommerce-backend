@@ -9,7 +9,8 @@ from .views import (
     ProductDetail,
     FeaturedBlog,
     BlogDetail,
-    SearchProducts
+    SearchProducts,
+    load_data
 )
 
 urlpatterns = [
@@ -23,4 +24,5 @@ urlpatterns = [
     path('blogs/featured/', FeaturedBlog.as_view()),
     path('blogs/<slug:slug>/', BlogDetail.as_view()),
     path("search/", SearchProducts.as_view()),
+    path('load-data/', load_data),
 ]
