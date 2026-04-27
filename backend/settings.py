@@ -15,6 +15,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 from decouple import config
+from django.core.management import call_command
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -143,3 +144,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
+
+if os.environ.get("RENDER"):
+    try:
+        call_command('loaddata', 'data.json')
+        print("Data loaded successfully")
+    except Exception as e:
+        print("Data load skipped:", e)
